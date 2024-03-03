@@ -11,6 +11,16 @@ public class Heap {
         this.heap = new ArrayList<>();
     }
 
+    public void insert(int value) {
+        heap.add(value);
+        int index = heap.size() - 1;
+        while (index > 0 && heap.get(parent(index)) < heap.get(index)) {
+            swap(index, parent(index));
+            index = parent(index);
+        }
+
+    }
+
     public List<Integer> getHeap() {
         return Collections.unmodifiableList(heap);
     }
@@ -27,7 +37,7 @@ public class Heap {
         return (index - 1) / 2;
     }
 
-    private void swap(int index1, int index2){
+    private void swap(int index1, int index2) {
         int temp = heap.get(index1);
         heap.set(index1, heap.get(index2));
         heap.set(index2, temp);
